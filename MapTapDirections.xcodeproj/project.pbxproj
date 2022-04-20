@@ -13,6 +13,7 @@
 		233406A2280DB9DE003F46D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233406A1280DB9DE003F46D3 /* Preview Assets.xcassets */; };
 		233406AA280DBA2E003F46D3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233406A9280DBA2E003F46D3 /* LocationManager.swift */; };
 		233406AD280DC1EA003F46D3 /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233406AC280DC1EA003F46D3 /* MapViewRepresentable.swift */; };
+		23D8A50E28106BA900D3CBC0 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D8A50D28106BA900D3CBC0 /* MapViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		233406A1280DB9DE003F46D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		233406A9280DBA2E003F46D3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		233406AC280DC1EA003F46D3 /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
+		23D8A50D28106BA900D3CBC0 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +57,10 @@
 		23340699280DB9DC003F46D3 /* MapTapDirections */ = {
 			isa = PBXGroup;
 			children = (
+				23D8A50C28106B9E00D3CBC0 /* ViewModel */,
 				233406AB280DC1D2003F46D3 /* View */,
 				233406A8280DBA11003F46D3 /* Manager */,
 				2334069A280DB9DD003F46D3 /* MapTapDirectionsApp.swift */,
-				2334069C280DB9DD003F46D3 /* ContentView.swift */,
 				2334069E280DB9DE003F46D3 /* Assets.xcassets */,
 				233406A0280DB9DE003F46D3 /* Preview Content */,
 			);
@@ -84,9 +86,18 @@
 		233406AB280DC1D2003F46D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2334069C280DB9DD003F46D3 /* ContentView.swift */,
 				233406AC280DC1EA003F46D3 /* MapViewRepresentable.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		23D8A50C28106B9E00D3CBC0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				23D8A50D28106BA900D3CBC0 /* MapViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2334069D280DB9DD003F46D3 /* ContentView.swift in Sources */,
+				23D8A50E28106BA900D3CBC0 /* MapViewModel.swift in Sources */,
 				2334069B280DB9DD003F46D3 /* MapTapDirectionsApp.swift in Sources */,
 				233406AD280DC1EA003F46D3 /* MapViewRepresentable.swift in Sources */,
 				233406AA280DBA2E003F46D3 /* LocationManager.swift in Sources */,

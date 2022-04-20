@@ -56,6 +56,8 @@ extension LocationManager: CLLocationManagerDelegate {
 //        print("DEBUG: Did update locations \(locations)")
         guard let location = locations.last else { return }
 //        print("DEBUG: User location is \(location)")
-        self.userLocation = location
+        
+        // commenting this line in will always keep map centered on users location
+//        self.userLocation = location
     }
 }
