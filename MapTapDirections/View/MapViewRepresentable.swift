@@ -11,6 +11,7 @@ import MapKit
 
 struct MapViewRepresentable: UIViewRepresentable {
     @ObservedObject var locationManager = LocationManager()
+    @StateObject var viewModel: MapViewModel
     @Binding var directionsEnabled: Bool
     
     // we make this a class level property to access it from anywhere in this class
@@ -25,11 +26,11 @@ struct MapViewRepresentable: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        if let userLocation = locationManager.userLocation {
-            let coordinates = userLocation.coordinate
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: coordinates, span: span)
-            mapView.setRegion(region, animated: true)
+        guard let userLocation = locationManager.userLocation else { return }
+        
+        if !directionsEnabled {
+            context.coordinator.centerMapOnUserLocation(userLocation)
+            context.coordinator.removeAnnotationsAndOverlays()
         }
     }
     
@@ -52,6 +53,13 @@ extension MapViewRepresentable {
             let tap = UITapGestureRecognizer(target: self,
                                              action: #selector(handleMapTapped))
             parent.mapView.addGestureRecognizer(tap)
+        }
+        
+        func centerMapOnUserLocation(_ userLocation: CLLocation) {
+            let coordinates = userLocation.coordinate
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: coordinates, span: span)
+            self.parent.mapView.setRegion(region, animated: true)
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -104,10 +112,11 @@ extension MapViewRepresentable {
                 
                 route.steps.forEach { step in
                     print("DEBUG: In \(step.distance) \(step.instructions)")
+                    self.parent.viewModel.setSteps(route.steps)
                 }
                 
                 self.setRegion(forPolyline: polyline)
-                self.parent.directionsEnabled = true 
+                self.parent.directionsEnabled = true
             }
         }
         
@@ -123,7 +132,7 @@ extension MapViewRepresentable {
         
         func setRegion(forPolyline polyline: MKPolyline) {
             let rect = self.parent.mapView.mapRectThatFits(polyline.boundingMapRect,
-                                                           edgePadding: .init(top: 16, left: 16, bottom: 16, right: 16))
+                                                           edgePadding: .init(top: 16, left: 16, bottom: 380, right: 16))
             self.parent.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
